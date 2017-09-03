@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">LeakSentry</string>
+
+    <!-- Shared Preferences Keys -->
+
+    <!-- name of xml file -->
+    <string name="prefName">leakSentryPrefs</string>
+
+    <!-- true if this is the first launch after install -->
+    <string name="isFirstLaunch">isFirstLaunch</string>
+
+    <!-- set of json strings each representing a gas -->
+    <string name="gases">gases</string>
+
+    <!-- tru if app is subscribed to sensor -->
+    <string name="isRegistered">isRegistered</string>
+
+    <!-- current temperature -->
+    <string name="temperature">temperature</string>
+
+    <!-- the id of the sensor that the app is subscribed to -->
+    <string name="sensorId">sensorId</string>
+
+    <!-- firebase notification token -->
+    <string name="notificationToken">nToken</string>
+
+    <!-- API -->
+    <string name="baseUrl">http://yourBaseUrlHere.com</string>
+
+</resources>
