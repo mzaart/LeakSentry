@@ -6,7 +6,9 @@ This repository contains the code of the Android application and the .Net Core A
 
 ### Screen Shots 
 
-<img src="https://github.com/mzaart/LeakSentry/blob/master/Screenshots/1.png?raw=true" width="250" height="428" align="left"/>
-<img src="https://github.com/mzaart/LeakSentry/blob/master/Screenshots/3.png?raw=true" width="250" height="428"/>
-<img src="https://github.com/mzaart/LeakSentry/blob/master/Screenshots/4.png?raw=true" width="350" height="600" align="left"/>
-<img src="https://github.com/mzaart/LeakSentry/blob/master/Screenshots/5.png?raw=true" width="350" height="600"/>
+<img src="https://github.com/mzaart/LeakSentry/blob/master/Screenshots/1.png?raw=true" width="271" height="463" align="left"/>
+<img src="https://github.com/mzaart/LeakSentry/blob/master/Screenshots/2.png?raw=true" width="271" height="463" align="left"/>
+<img src="https://github.com/mzaart/LeakSentry/blob/master/Screenshots/3.png?raw=true" width="271" height="463" align="left"/>
+<img src="https://github.com/mzaart/LeakSentry/blob/master/Screenshots/4.png?raw=true" width="271" height="463" align="left"/>
+<img src="https://github.com/mzaart/LeakSentry/blob/master/Screenshots/5.png?raw=true" width="271" height="463" align="left"/>
+<img src="https://github.com/mzaart/LeakSentry/blob/master/Screenshots/6.png?raw=true" width="271" height="463" align="left"/>
