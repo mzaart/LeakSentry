@@ -6,6 +6,7 @@ This repository contains the code of the Android application and the .Net Core A
 
 ### Screen Shots 
 
-![alt text][img1]
-
-[img1]: https://github.com/mzaart/LeakSentry/blob/master/Screenshots/1.png?raw=true
+<img src="https://github.com/mzaart/LeakSentry/blob/master/Screenshots/1.png?raw=true" width="350" height="600" align="left"/>
+<img src="https://github.com/mzaart/LeakSentry/blob/master/Screenshots/3.png?raw=true" width="350" height="600"/>
+<img src="https://github.com/mzaart/LeakSentry/blob/master/Screenshots/4.png?raw=true" width="350" height="600" align="left"/>
+<img src="https://github.com/mzaart/LeakSentry/blob/master/Screenshots/5.png?raw=true" width="350" height="600"/>
