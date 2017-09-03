@@ -1,0 +1,6 @@
+<resources>
+    <!-- messages -->
+    <string name="onSubscribeFail">Subscription failed. Please try again.</string>
+    <string name="onSubscribeSuccess">Subscribed successfully to sensor.</string>
+    <string name="invalidId">"ID should be a positive integer."</string>
+</resources>
