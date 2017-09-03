@@ -20,7 +20,7 @@ public class AlarmPresenter extends AlarmContract.ViewActions {
     @Override
     public void getDos(String gasName) {
         BufferedReader reader = new BufferedReader(
-                new InputStreamReader(res.openRawResource(gasName + "_dos")));
+                new InputStreamReader(res.openRawResource(gasName.toLowerCase() + "_dos")));
 
         Observable.defer(() -> new BufferedReaderObservableSource(reader))
                 .subscribeOn(Schedulers.io())
@@ -35,7 +35,7 @@ public class AlarmPresenter extends AlarmContract.ViewActions {
     @Override
     public void getDonts(String gasName) {
         BufferedReader reader = new BufferedReader(new InputStreamReader(
-                res.openRawResource(gasName + "_donts")));
+                res.openRawResource(gasName.toLowerCase() + "_donts")));
 
         Observable.defer(() -> new BufferedReaderObservableSource(reader))
                 .subscribeOn(Schedulers.io())

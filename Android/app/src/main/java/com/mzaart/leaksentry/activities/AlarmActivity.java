@@ -78,16 +78,18 @@ public class AlarmActivity extends AppCompatActivity implements AlarmContract.Al
     // display instructions
     @Override
     public void addDos(String action) {
-        $.inflate(this, R.layout.dos, $(this, R.id.dos), true)
-                .find(R.id.do_item)
-                .text(action);
+        $ parent = $(this, R.id.dos);
+        $ item = $.inflate(this, R.layout.dos, parent);
+        item.find(R.id.do_item).text(action);
+        parent.append(item);
     }
 
     @Override
     public void addDonts(String action) {
-        $.inflate(this, R.layout.donts, $(this, R.id.donts), true)
-                .find(R.id.dont_item)
-                .text(action);
+        $ parent = $(this, R.id.donts);
+        $ item = $.inflate(this, R.layout.donts, parent);
+        item.find(R.id.dont_item).text(action);
+        parent.append(item);
     }
     
     @Override
