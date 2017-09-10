@@ -13,7 +13,7 @@ namespace LeakSentryAPI.Firebase
     {
         // constants
         private static readonly string FIREBASE_URL = "https://fcm.googleapis.com";
-        public static readonly string AUTHORIZATION_KEY = "AAAAG78OP-8:APA91bHMlXHSQZg4rHyzq5bA8Z1jcQ6uRKmb7s5ixbbfaqrH4Db5VArLLpLDxLvzUB9n8FAkArbA6RuT9PIRksUN7z4T_uv2JJD1yPMMcil9Z2zOzTZ60CZgu5HUb_roPx4vUhKinrfh";
+        public static readonly string AUTHORIZATION_KEY = "insert your auth key here";
 
         private static FirebaseClient client = new FirebaseClient();
 
