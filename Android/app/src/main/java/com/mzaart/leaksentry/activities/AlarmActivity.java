@@ -7,20 +7,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.mzaart.leaksentry.MyApplication;
-import com.mzaart.leaksentry.alarm.AlarmContract;
-import com.mzaart.leaksentry.aquery.$;
-import static com.mzaart.leaksentry.aquery.Constructors.*;
+import com.mzaart.leaksentry.mvp.alarm.AlarmContract;
+import com.mzaart.aquery.$;
+import static com.mzaart.aquery.Constructors.*;
 import com.mzaart.leaksentry.dagger.modules.PresenterModule;
 
 import com.mzaart.leaksentry.R;
 
 import javax.inject.Inject;
 
-import com.mzaart.leaksentry.alarm.AlarmPresenter;
+import com.mzaart.leaksentry.mvp.alarm.AlarmPresenter;
 
 import com.mzaart.leaksentry.dagger.components.DaggerPresenterComponent;
 
-public class AlarmActivity extends AppCompatActivity implements AlarmContract.AlarmView {
+public class AlarmActivity extends BaseActivity implements AlarmContract.AlarmView {
 
     public AlarmContract.ViewActions presenter;
 
@@ -36,7 +36,7 @@ public class AlarmActivity extends AppCompatActivity implements AlarmContract.Al
         Intent intent = getIntent();
         String gasName = intent.getStringExtra("gasName");
 
-        $(this, R.id.dangerousGas).text(gasName.toUpperCase()+ " levels are Dangerous!");
+        $(this, R.id.dangerousGas).text(gasName.toUpperCase() + " levels are Dangerous!");
 
         // play alarm
         player = MediaPlayer.create(this, R.raw.alarm);
@@ -48,15 +48,12 @@ public class AlarmActivity extends AppCompatActivity implements AlarmContract.Al
         presenter = (AlarmContract.ViewActions) getLastCustomNonConfigurationInstance();
         if (presenter == null) {
             // inject presenter
-            DaggerPresenterComponent.builder()
-                    .presenterModule(new PresenterModule())
-                    .build()
-                    .inject(this);
+            getPresenterComponent().inject(this);
         }
         presenter.attachView(this);
 
         // inject presenter dependencies
-        ((MyApplication) getApplication()).getComponent().inject((AlarmPresenter) presenter);
+        getAppComponent().inject((AlarmPresenter) presenter);
 
         $(this).ready(() -> {
             // fetch instructions

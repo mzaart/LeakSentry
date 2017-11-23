@@ -17,8 +17,6 @@ public class MyApplication extends Application {
     public static boolean isRegistered;
     public static boolean alarmDismissed = false;
 
-    private AppComponent component;
-
     @Override
     public void onCreate() {
         super.onCreate();
@@ -45,16 +43,5 @@ public class MyApplication extends Application {
         } else {
             isRegistered = prefs.getBoolean(getString(R.string.isRegistered), false);
         }
-    }
-
-    public AppComponent getComponent() {
-        if(component == null) {
-            component = DaggerAppComponent.builder()
-                    .appModule(new AppModule(this))
-                    .apiModule(new ApiModule(this))
-                    .build();
-        }
-
-        return component;
     }
 }

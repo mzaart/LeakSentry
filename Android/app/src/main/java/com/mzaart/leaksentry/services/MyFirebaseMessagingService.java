@@ -8,7 +8,7 @@ import com.mzaart.leaksentry.R;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.google.gson.Gson;
-import com.mzaart.leaksentry.gasInfo.Gas;
+import com.mzaart.leaksentry.mvp.gasInfo.Gas;
 
 import java.util.HashSet;
 import java.util.Map;
@@ -32,17 +32,15 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Set<String> gases = gson.fromJson(data.get("jsonGas"), HashSet.class);
             editor.putStringSet(getString(R.string.gases), gases);
 
-            // check for dangerous levels
-            for (String jsonGas: gases) {
-                Gas gas = gson.fromJson(jsonGas, Gas.class);
-
-                if (gas.isDangerous()) {
-                    Intent intent = new Intent(this, AlarmActivity.class);
-                    intent.putExtra("gasName", gas.name);
-                    startActivity(intent);
-                    break;
-                }
-            }
+            gases.stream()
+                    .map(json -> gson.fromJson(json, Gas.class))
+                    .filter(Gas::isDangerous)
+                    .limit(1)
+                    .forEach(g -> {
+                        Intent intent = new Intent(this, AlarmActivity.class);
+                        intent.putExtra("gasName", g.name);
+                        startActivity(intent);
+                    });
         }
 
         editor.apply();

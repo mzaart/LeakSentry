@@ -7,6 +7,7 @@ import android.content.res.Resources;
 import com.mzaart.leaksentry.MyApplication;
 import com.mzaart.leaksentry.R;
 import com.google.firebase.iid.FirebaseInstanceId;
+import com.mzaart.leaksentry.utils.BitmapLoader;
 import com.mzaart.leaksentry.utils.ResourceProvider;
 
 import javax.inject.Singleton;
@@ -17,32 +18,37 @@ import dagger.Provides;
 @Module
 public class AppModule {
 
-    private MyApplication app;
+    private Context context;
 
-    public AppModule(MyApplication app) {
-        this.app = app;
+    public AppModule(Context context) {
+        this.context = context;
     }
 
     @Singleton
     @Provides
     public SharedPreferences getSharedPreferences() {
-        return app.getSharedPreferences(app.getString(R.string.prefName), Context.MODE_PRIVATE);
+        return context.getSharedPreferences(context.getString(R.string.prefName), Context.MODE_PRIVATE);
     }
 
     @Singleton
     @Provides
     public Resources getResources() {
-        return app.getResources();
+        return context.getResources();
     }
 
     @Singleton
     @Provides
     public ResourceProvider getResourceProvider() {
-        return new ResourceProvider(app.getResources(), app.getPackageName());
+        return new ResourceProvider(context.getResources(), context.getPackageName());
     }
 
     @Provides
     public FirebaseInstanceId getFirebaseInstanceId() {
         return FirebaseInstanceId.getInstance();
+    }
+    
+    @Provides
+    public BitmapLoader getBitmapLoader() {
+        return new BitmapLoader(context);
     }
 }

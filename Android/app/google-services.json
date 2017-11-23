@@ -1,3 +1,86 @@
 {
-  "message": "put your google-services.json here"
+  "project_info": {
+    "project_number": "119169499119",
+    "firebase_url": "https://arduinoproject-b38f0.firebaseio.com",
+    "project_id": "arduinoproject-b38f0",
+    "storage_bucket": "arduinoproject-b38f0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119169499119:android:9c0d09ad18263f10",
+        "android_client_info": {
+          "package_name": "com.mzaart.com.mzaart.leaksentry"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "119169499119-ajff1mj0b5tpbaokso1eip6o5ej2kmv3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9x_ELe1eVBF9Wl89o1QKFbA2DAZAKljg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:119169499119:android:b7ceebe04acebc81",
+        "android_client_info": {
+          "package_name": "com.mzaart.leaksentry"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "119169499119-qpq4obgdbrv3m35k03fdiuhsfht3gi4q.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mzaart.leaksentry",
+            "certificate_hash": "9d30e50684bebbd6affdd45603c3259f6dc2456a"
+          }
+        },
+        {
+          "client_id": "119169499119-ajff1mj0b5tpbaokso1eip6o5ej2kmv3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB9x_ELe1eVBF9Wl89o1QKFbA2DAZAKljg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "119169499119-ajff1mj0b5tpbaokso1eip6o5ej2kmv3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
 }

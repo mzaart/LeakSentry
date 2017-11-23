@@ -3,22 +3,20 @@ package com.mzaart.leaksentry.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
 import com.mzaart.leaksentry.MyApplication;
-import com.mzaart.leaksentry.aquery.$;
-import static com.mzaart.leaksentry.aquery.Constructors.*;
-import com.mzaart.leaksentry.base.BasePresenter;
-import com.mzaart.leaksentry.dagger.modules.PresenterModule;
-import com.mzaart.leaksentry.gasInfo.GasInfoContract;
-import com.mzaart.leaksentry.gasInfo.GasInfoPresenter;
-import com.mzaart.leaksentry.time.TimeContract;
-import com.mzaart.leaksentry.time.TimePresenter;
-import com.mzaart.leaksentry.utils.rxUtils.bitmapObservableSource.BitmapObservableSource;
+import com.mzaart.aquery.$;
+import static com.mzaart.aquery.Constructors.*;
+import com.mzaart.leaksentry.mvp.BasePresenter;
+import com.mzaart.leaksentry.mvp.gasInfo.GasInfoContract;
+import com.mzaart.leaksentry.mvp.gasInfo.GasInfoPresenter;
+import com.mzaart.leaksentry.mvp.time.TimeContract;
+import com.mzaart.leaksentry.mvp.time.TimePresenter;
 
 import com.mzaart.leaksentry.R;
 
@@ -29,12 +27,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import com.mzaart.leaksentry.dagger.components.DaggerPresenterComponent;
-import io.reactivex.Observable;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.schedulers.Schedulers;
-
-public class MainActivity extends AppCompatActivity implements GasInfoContract.GasInfoView, TimeContract.TimeView {
+public class MainActivity extends BaseActivity implements GasInfoContract.GasInfoView,
+        TimeContract.TimeView {
 
     private static int[] styles = {R.style.Safe, R.style.Caution, R.style.Warning, R.style.Dangerous};
     private static int style = styles[0];
@@ -60,12 +54,9 @@ public class MainActivity extends AppCompatActivity implements GasInfoContract.G
         List<BasePresenter> presenters = (List<BasePresenter>) getLastCustomNonConfigurationInstance();
 
         if (presenters == null) {
-            DaggerPresenterComponent.builder()
-                    .presenterModule(new PresenterModule())
-                    .build()
-                    .inject(this);
+            getPresenterComponent().inject(this);
 
-            ((MyApplication) getApplication()).getComponent().inject((GasInfoPresenter) gasInfoPresenter);
+            getAppComponent().inject((GasInfoPresenter) gasInfoPresenter);
         } else {
             gasInfoPresenter = (GasInfoContract.ViewActions) presenters.get(0);
             timePresenter = (TimeContract.ViewActions) presenters.get(1);
@@ -75,20 +66,13 @@ public class MainActivity extends AppCompatActivity implements GasInfoContract.G
         timePresenter.attachView(this);
 
         // set date
-        $(this, R.id.current_time).text(new SimpleDateFormat("hh:mm a").format(new Date()));
-        $(this, R.id.current_day).text(new SimpleDateFormat("EEE MMM d").format(new Date()));
+        $(this, R.id.current_time).text(SimpleDateFormat.getTimeInstance().format(new Date()));
+        $(this, R.id.current_day).text(SimpleDateFormat.getDateInstance().format(new Date()));
 
         $(this).ready(() -> {
             // set background image
             $ bg = $(this, R.id.bg);
-            Observable.defer(() ->
-                    new BitmapObservableSource.Builder(this, bg.width(), bg.height())
-                            .resources(getResources())
-                            .resourceId(R.drawable.bg3)
-                            .build())
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(bg::bitmap);
+            gasInfoPresenter.loadBackground(bg.width(), bg.height(), R.drawable.bg3);
 
             timePresenter.startTimer();
             gasInfoPresenter.getGasLevels();
@@ -159,10 +143,14 @@ public class MainActivity extends AppCompatActivity implements GasInfoContract.G
         parent.append(gasInfo);
     }
 
-    // displays temperature
     @Override
     public void displayTemperature(int t) {
         $(this, R.id.temperature).text(String.format("%d ℃", t));
+    }
+
+    @Override
+    public void displayBackground(Bitmap b) {
+        $(this, R.id.bg).bitmap(b);
     }
 
     @Override
@@ -170,14 +158,12 @@ public class MainActivity extends AppCompatActivity implements GasInfoContract.G
         $(this, R.id.current_time).text(timeStr);
     }
 
-    // inflate menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
-    // handle menu item clicks
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -185,10 +171,12 @@ public class MainActivity extends AppCompatActivity implements GasInfoContract.G
                 SharedPreferences prefs = getSharedPreferences(getString(R.string.prefName), Context.MODE_PRIVATE);
                 Intent intent;
 
-                if (prefs.getBoolean(getString(R.string.isRegistered), false))
-                    intent= new Intent(this, UnsubscribeActivity.class);
-                else
-                    intent= new Intent(this, AddSensorActivity.class);
+                if (prefs.getBoolean(getString(R.string.isRegistered), false)) {
+                    intent = new Intent(this, UnsubscribeActivity.class);
+                }
+                else {
+                    intent = new Intent(this, AddSensorActivity.class);
+                }
 
                 intent.putExtra("style", style);
                 startActivity(intent);

@@ -5,9 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.mzaart.leaksentry.MyApplication;
-import static com.mzaart.leaksentry.aquery.Constructors.*;
+import static com.mzaart.aquery.Constructors.*;
 import com.mzaart.leaksentry.dagger.modules.PresenterModule;
-import com.mzaart.leaksentry.unsubscribeSensor.UnsubscribePresenter;
+import com.mzaart.leaksentry.mvp.unsubscribeSensor.UnsubscribePresenter;
 
 import com.mzaart.leaksentry.R;
 
@@ -15,9 +15,9 @@ import javax.inject.Inject;
 
 import com.mzaart.leaksentry.dagger.components.DaggerPresenterComponent;
 
-import com.mzaart.leaksentry.unsubscribeSensor.UnsubscribeContract;
+import com.mzaart.leaksentry.mvp.unsubscribeSensor.UnsubscribeContract;
 
-public class UnsubscribeActivity extends AppCompatActivity implements UnsubscribeContract.View {
+public class UnsubscribeActivity extends BaseActivity implements UnsubscribeContract.View {
 
     UnsubscribeContract.ViewActions presenter;
 
@@ -34,11 +34,8 @@ public class UnsubscribeActivity extends AppCompatActivity implements Unsubscrib
         // setup presenter
         presenter = (UnsubscribeContract.ViewActions) getLastCustomNonConfigurationInstance();
         if (presenter == null) {
-            DaggerPresenterComponent.builder()
-                    .presenterModule(new PresenterModule())
-                    .build()
-                    .inject(this);
-            ((MyApplication) getApplication()).getComponent().inject((UnsubscribePresenter) presenter);
+            getPresenterComponent().inject(this);
+            getAppComponent().inject((UnsubscribePresenter) presenter);
         }
         presenter.attachView(this);
 
@@ -63,10 +60,11 @@ public class UnsubscribeActivity extends AppCompatActivity implements Unsubscrib
     public void confirm(boolean succeeded) {
         Intent intent = new Intent(this, MainActivity.class);
 
-        if (succeeded)
+        if (succeeded) {
             intent.putExtra("message", "Successfully unsubscribed from sensor.");
-        else
+        } else {
             intent.putExtra("message", "Failed to unsubscribe from sensor.");
+        }
 
         startActivity(intent);
     }

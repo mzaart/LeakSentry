@@ -1,12 +1,12 @@
 package com.mzaart.leaksentry.dagger.modules;
 
-import com.mzaart.leaksentry.time.TimePresenter;
-import com.mzaart.leaksentry.unsubscribeSensor.UnsubscribePresenter;
-import com.mzaart.leaksentry.addSensor.AddSensorPresenter;
-import com.mzaart.leaksentry.alarm.AlarmPresenter;
+import com.mzaart.leaksentry.mvp.time.TimePresenter;
+import com.mzaart.leaksentry.mvp.unsubscribeSensor.UnsubscribePresenter;
+import com.mzaart.leaksentry.mvp.addSensor.AddSensorPresenter;
+import com.mzaart.leaksentry.mvp.alarm.AlarmPresenter;
 import dagger.Module;
 import dagger.Provides;
-import com.mzaart.leaksentry.gasInfo.GasInfoPresenter;
+import com.mzaart.leaksentry.mvp.gasInfo.GasInfoPresenter;
 
 @Module
 public class PresenterModule {

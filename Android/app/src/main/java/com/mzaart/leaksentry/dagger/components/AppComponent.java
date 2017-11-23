@@ -1,14 +1,14 @@
 package com.mzaart.leaksentry.dagger.components;
 
 import com.mzaart.leaksentry.dagger.modules.AppModule;
-import com.mzaart.leaksentry.unsubscribeSensor.UnsubscribePresenter;
+import com.mzaart.leaksentry.mvp.unsubscribeSensor.UnsubscribePresenter;
 
 import javax.inject.Singleton;
-import com.mzaart.leaksentry.addSensor.AddSensorPresenter;
-import com.mzaart.leaksentry.alarm.AlarmPresenter;
+import com.mzaart.leaksentry.mvp.addSensor.AddSensorPresenter;
+import com.mzaart.leaksentry.mvp.alarm.AlarmPresenter;
 import dagger.Component;
 import com.mzaart.leaksentry.dagger.modules.ApiModule;
-import com.mzaart.leaksentry.gasInfo.GasInfoPresenter;
+import com.mzaart.leaksentry.mvp.gasInfo.GasInfoPresenter;
 
 @Singleton
 @Component(modules = {
